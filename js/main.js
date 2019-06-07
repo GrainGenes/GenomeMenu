@@ -28,7 +28,7 @@ return declare( JBrowsePlugin,
         browser.afterMilestone( 'loadConfig', function() {
 			
             // override BlockBased
-            require(["dojo/_base/lang", "JBrowse/Browser"], function(lang, BlockBased){
+            require(["dojo/_base/lang", "JBrowse/Browser"], function(lang, Browser){
                 lang.extend(Browser, {
                     renderDatasetSelect: function( parent ) {
 
