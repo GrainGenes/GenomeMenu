@@ -4,6 +4,10 @@ define([
         'dojo/Deferred',
         'dojo/dom-construct',
         'dojo/query',
+		'dojo/store/Memory',
+		'dijit/form/ComboBox',
+		'dijit/MenuItem',
+		'dijit/MenuSeparator',
         'JBrowse/Plugin'
     ],
        function(
@@ -12,6 +16,10 @@ define([
         Deferred,
         domConstruct,
         query,
+		dojoMemoryStore,
+		dijitComboBox,
+		dijitMenuItem,
+		dijitMenuSeparator,
         JBrowsePlugin
        ) {
 return declare( JBrowsePlugin,
