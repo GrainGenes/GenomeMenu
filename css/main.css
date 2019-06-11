@@ -1,1 +1,10 @@
-/* */
+/* Handle group headings in Genome menu*/
+tr[id*="menubar_dataset_bookmark_group-"] > td.dijitMenuItemIconCell {
+	display: none;
+}
+tr[id*="menubar_dataset_bookmark_group-"] > td.dijitMenuItemLabel {
+	font-weight: bold;
+	pointer-events: none;
+	cursor: default;
+	text-decoration: none;
+}
