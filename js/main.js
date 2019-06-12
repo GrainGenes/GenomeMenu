@@ -88,7 +88,7 @@ return declare( JBrowsePlugin,
 											id: 'menubar_dataset_bookmark_' + id,
 											label: id == this.config.dataset_id ? ('<b>' + dataset.name + '</b>') : dataset.name,
 											iconClass: 'dijitIconBookmark',
-											onClick: dojo.hitch( dataset, function() { window.location = this.url } )
+											onClick: dojo.hitch( dataset, function() { window.parent.location = this.url } )
 										})
 									  );
 									}
