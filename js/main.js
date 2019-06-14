@@ -29,8 +29,18 @@ return declare( JBrowsePlugin,
         let browser = this.browser;
 
 		let overrideGenomeMenu = args.overrideGenomeMenu || false;
+		let shareHide = args.shareHide || true;
 
         console.log("plugin: GenomeMenu");
+
+		// handle hiding share button
+		if (shareHide) {
+			browser.afterMilestone( 'initView', function() {
+				console.log("hiding share");
+				$('span[widgetid*="dijit_form_Button_0"]').css("visibility","hidden");
+			});
+		}
+		
         /*
          * class override function intercepts
          */
