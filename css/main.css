@@ -9,4 +9,7 @@ tr[id*="menubar_dataset_bookmark_group-"] > td.dijitMenuItemLabel {
 	text-decoration: none;
 }
 
-
+div.menuBar {
+	background-image: url("../img/head.png") !important;
+	background-size: contain !important;
+}
