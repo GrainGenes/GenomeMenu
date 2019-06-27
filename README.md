@@ -58,3 +58,16 @@ In JBrowse config file:
   }
 }  
 ```
+
+Plugin option overrideGenomeMenu to bypass genome menu link out to parent.  (default false)
+This is for versions of jbrowse that do not support the "datasetLinkToParentIframe":true option.
+
+Value is defined in the plugin config of jbrowse config:
+```
+"plugins": [
+    {
+        "name":"GenomeMenu",
+        "overrideGenomeMenu": true
+    }
+]
+```
