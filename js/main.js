@@ -78,7 +78,7 @@ return declare( JBrowsePlugin,
 										let found = false;
 										for(var i in subgroups) {
 											if (subgroups[i][id]) {
-												window.location = subgroups[i][id].url;
+												window.parent.location = subgroups[i][id].url;
 												found = true;
 											}
 										}
