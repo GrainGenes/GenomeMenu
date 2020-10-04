@@ -71,3 +71,6 @@ Value is defined in the plugin config of jbrowse config:
     }
 ]
 ```
+
+## dependencies
+https://www.jqueryscript.net/menu/dynamic-popup-menu.html

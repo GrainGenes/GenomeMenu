@@ -31,7 +31,23 @@ return declare( JBrowsePlugin,
 		let overrideGenomeMenu = args.overrideGenomeMenu || false;
 		let shareHide = args.shareHide || true;
 
-        console.log("plugin: GenomeMenu");
+		let datasets = this.browser.config.datasets;
+
+		// create subgroup list
+		let subgroups = {};
+		for( let i in datasets) {
+			if (i.startsWith("subgroup-")) {
+				let subs = i.replace("subgroup-","");
+				subgroups[subs] = datasets[i].subgroup;
+			}
+		}
+
+        console.log("plugin: GenomeMenu",subgroups);
+
+		// add popmenu CDN plugin https://www.jqueryscript.net/menu/dynamic-popup-menu.html
+		$('body').prepend('<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tianlunvip/popmenu/popmenu.css">');
+		$('body').prepend('<script src="//cdn.jsdelivr.net/gh/tianlunvip/popmenu/popmenu.min.js"></script>');
+
 
 		// handle hiding share button
 		if (shareHide) {
@@ -40,14 +56,66 @@ return declare( JBrowsePlugin,
 				$('span[widgetid*="dijit_form_Button_0"]').css("visibility","hidden");
 			});
 		}
+		browser.afterMilestone( 'initView', function() {
+			$("body").on('click','span[widgetid="dropdownbutton_dataset"]',function() {
+				console.log("Genome Menu Click");
+
+				//var iframe = $("jb_iframe").contents();
+				setTimeout(function(){
+					//var thing = $('tr[id*="menubar_dataset_bookmark_subgroup"] > td.dijitMenuItemLabel');
+					let thing = $('tr[id*="menubar_dataset_bookmark_subgroup"]');
+					if (thing.length) {
+						for (let i=0;i<thing.length;i++) {
+							$("#"+thing[i].id+" > td.dijitMenuItemLabel").append("<span> &gt;</span>");
+							let offset = $("#"+thing[i].id).offset();
+							let subname = thing[i].id.replace('menubar_dataset_bookmark_subgroup-','');
+							$("#"+thing[i].id+" > td").click(function(e) {
+								popmenu({
+									items : subgroups[subname],
+									callback: function(item){
+										console.log("item",item,subgroups);
+										let id = $(item).attr('id');
+										let found = false;
+										for(var i in subgroups) {
+											if (subgroups[i][id]) {
+												window.location = subgroups[i][id].url;
+												found = true;
+											}
+										}
+										if (!found)
+											alert (id+" not found");
+									},
+									
+									x: offset.left + 200,
+									y: offset.top + 20
+									
+								});
+								$("[role='popmenu-layer']").mouseleave(function() {
+									$("[role='popmenu-layer']").remove();
+								});
+								$('tr[id*="menubar_dataset_bookmark"]').mouseenter(function() {
+									$("[role='popmenu-layer']").remove();
+								});
 		
-        /*
+								return false;
+							});
+						}
+					}
+				},200);
+	
+	
+			});
+		});
+		/*
          * class override function intercepts
          */
 		
 		if (overrideGenomeMenu) {
 			browser.afterMilestone( 'loadConfig', function() {
+				console.log("override menu");
 				
+
+
 				// override Browser
 				require(["dojo/_base/lang", "JBrowse/Browser"], function(lang, Browser){
 					lang.extend(Browser, {
@@ -117,4 +185,3 @@ return declare( JBrowsePlugin,
     }
 });	
 });
-

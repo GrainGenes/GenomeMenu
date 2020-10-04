@@ -8,8 +8,32 @@ tr[id*="menubar_dataset_bookmark_group-"] > td.dijitMenuItemLabel {
 	cursor: default;
 	text-decoration: none;
 }
+tr[id*="menubar_dataset_bookmark_subgroup-"] > td.dijitMenuItemLabel {
+	#pointer-events: none;
+	cursor: default;
+	position:relative;
+}
+tr[id*="menubar_dataset_bookmark_subgroup-"] > td.dijitMenuItemLabel > span {
+	position:absolute;
+	right: 0px;
+	font-weight: bold;
+}
 
 div.menuBar {
 	background-image: url("../img/head.png") !important;
 	background-size: contain !important;
+}
+
+/* hover genome submenu */
+/*
+.popmenu-hover {
+	z-index: 99999;
+	position:absolute;
+}
+*/
+[role='popmenu'] {
+	z-index: 99999;
+}
+.dijitMenuItem > .digitMenuItemIconCell {
+	width: 20px;
 }
