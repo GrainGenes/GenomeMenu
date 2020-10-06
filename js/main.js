@@ -28,6 +28,9 @@ return declare( JBrowsePlugin,
         let thisB = this;
         let browser = this.browser;
 
+		console.log("plugin: GenomeMenu");
+		console.log("url path",window.location.pathname);
+
 		let overrideGenomeMenu = args.overrideGenomeMenu || false;
 		let shareHide = args.shareHide || true;
 
@@ -42,12 +45,11 @@ return declare( JBrowsePlugin,
 			}
 		}
 
-        console.log("plugin: GenomeMenu",subgroups);
-
 		// add popmenu CDN plugin https://www.jqueryscript.net/menu/dynamic-popup-menu.html
-		$('body').prepend('<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tianlunvip/popmenu/popmenu.css">');
-		$('body').prepend('<script src="//cdn.jsdelivr.net/gh/tianlunvip/popmenu/popmenu.min.js"></script>');
-
+		//$('body').prepend('<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/tianlunvip/popmenu/popmenu.css">');
+		$('body').prepend('<link rel="stylesheet" href="plugins/GenomeMenu/js/dynamic-popup-menu/popmenu.css">');
+		//$('body').prepend('<script src="//cdn.jsdelivr.net/gh/tianlunvip/popmenu/popmenu.min.js"></script>');
+		$('body').prepend('<script src="plugins/GenomeMenu/js/dynamic-popup-menu/popmenu.js"></script>');
 
 		// handle hiding share button
 		if (shareHide) {
@@ -58,7 +60,7 @@ return declare( JBrowsePlugin,
 		}
 		browser.afterMilestone( 'initView', function() {
 			$("body").on('click','span[widgetid="dropdownbutton_dataset"]',function() {
-				console.log("Genome Menu Click");
+				//console.log("Genome Menu Click");
 
 				//var iframe = $("jb_iframe").contents();
 				setTimeout(function(){
@@ -70,6 +72,8 @@ return declare( JBrowsePlugin,
 							let offset = $("#"+thing[i].id).offset();
 							let subname = thing[i].id.replace('menubar_dataset_bookmark_subgroup-','');
 							$("#"+thing[i].id+" > td").click(function(e) {
+								let w = $('div[aria-label="dropdownmenu_dataset"]').width();
+								console.log(w,$('div[aria-label="dropdownmenu_dataset"] dijitMenuItem').width());
 								popmenu({
 									items : subgroups[subname],
 									callback: function(item){
@@ -86,10 +90,11 @@ return declare( JBrowsePlugin,
 											alert (id+" not found");
 									},
 									
-									x: offset.left + 200,
-									y: offset.top + 20
+									x: offset.left + 300,
+									y: offset.top + 26
 									
 								});
+
 								$("[role='popmenu-layer']").mouseleave(function() {
 									$("[role='popmenu-layer']").remove();
 								});

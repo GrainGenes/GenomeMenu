@@ -58,7 +58,7 @@ function popmenu(options) {
 		$("[role='popmenu-layer']").remove();
 	});
 
-	$("[role='popmenu']").focus();
+	$("[role='popmenu'] > td:first").focus().addClass('popmenu-hover');
 
 	$("[role='popmenu']>li").hover(function() {
 		$(this).addClass('popmenu-hover');
@@ -80,6 +80,7 @@ function popmenu(options) {
 		$("[role='popmenu']").hide();
 		$("[role='popmenu-layer']").remove();
 	})
+
 	// 不响应浏览器右键系统菜单 任何消息
 	$("[role='popmenu']").mousedown(function(event){
 		event.stopPropagation();		// 忽略事件
@@ -89,4 +90,5 @@ function popmenu(options) {
 		$("[role='popmenu']").hide();
 		$("[role='popmenu-layer']").remove();
 	});
+
 }

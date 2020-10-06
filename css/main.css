@@ -25,15 +25,13 @@ div.menuBar {
 }
 
 /* hover genome submenu */
-/*
-.popmenu-hover {
-	z-index: 99999;
-	position:absolute;
+
+.dijitMenuItem > .dijitMenuItemIconCell {
+	width: 20px;
 }
-*/
+
+/* modified popmenu styles */
 [role='popmenu'] {
 	z-index: 99999;
 }
-.dijitMenuItem > .digitMenuItemIconCell {
-	width: 20px;
-}
+  
