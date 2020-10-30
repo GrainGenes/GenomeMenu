@@ -33,6 +33,7 @@
     -ms-user-select: none;
     user-select: none;
     background-color: #f7f7f7;
+    white-space: nowrap;
 }
 [role='popmenu'] hr {
     border: 0;
@@ -45,6 +46,7 @@
   x-ms-transform: translateX(2%);
   x-o-transform: translateX(2%);
   xtransform: translateX(2%);
+  white-space: nowrap;
 }
 .fa {
   color: #3559ac;
