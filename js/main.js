@@ -59,6 +59,177 @@ return declare( JBrowsePlugin,
 			});
 		}
 		browser.afterMilestone( 'initView', function() {
+
+			setTimeout(function() {
+				$("[widgetid*='dropdownbutton_dataset']").before('<span class="genomemenu2 dijit dijitReset dijitInline menu dijitDropDownButton" widgetid="dropdownbutton_genomemenu"> Genome</span>');
+				$("[widgetid*='dropdownbutton_dataset']").hide();
+	
+				let gm = $("[widgetid*='dropdownbutton_genomemenu']");
+				
+				gm.click(function() {
+					//alert("genome menu");
+					$('<div/>').dialog({
+						modal: true,
+						title: 'Genome Menu',
+						open: function() {
+							let thisb = this;
+							$.get("/ggds/genome-menu.php", function(data) {
+								var result = data.substring(data.indexOf('<div '));		
+								console.log(result);
+								let str = `<style>
+								.ggbrowse-header {
+									width: 100%;
+									color: white;
+									font-weight: bold;
+									font-size: 120%;
+									margin-top: 25px;
+									margin-bottom: 5px;
+									background-image: url(/jb/img/subtitle.png?1);
+									padding: 5px;
+									background-repeat: no-repeat;
+									background-size: contain;
+								
+									-webkit-border-top-left-radius: 5px;
+									-moz-border-radius-topleft: 5px;
+									border-top-left-radius: 5px;
+								}
+								.ggbrowse-item {
+									position:relative;
+									overflow:hidden;
+									border: 3px solid #335671;
+									width: 263px;
+									display: inline-block;
+									background-size:400px;
+									height:70px;
+									vertical-align:top;
+									margin-right: 8px;
+									margin-bottom: 8px;
+								
+									-webkit-border-bottom-right-radius: 10px;
+									-webkit-border-bottom-left-radius: 10px;
+									-moz-border-radius-bottomright: 10px;
+									-moz-border-radius-bottomleft: 10px;
+									border-bottom-right-radius: 10px;
+									border-bottom-left-radius: 10px;
+									box-shadow: 5px 5px 7px grey;
+								}
+								.ggbrowse-subgroup-btn {
+									cursor: pointer;
+								}
+								.ggbrowse-subgroup {
+									padding: 10px;
+								}
+								.ggbrowse-subgroup > .ggbrowse-item {
+									width: 250px;
+								}
+								.ggbrowse-item > div {
+									position: absolute;
+									top: 10px;
+									left: 10px;
+									width: 250px;
+								}
+								.ggbrowse-bkg {
+									position: absolute;
+									top:0px;
+									left:0px;
+									opacity: .4;
+								}
+								.ggbrowse-bkg1 {
+									position: absolute;
+									top:0px;
+									left:0px;
+									opacity: .6;
+								}
+								.ggbrowse-bkg2 {
+									position: absolute;
+									bottom:0px;
+									left:0px;
+									width:50%;
+									opacity: 100;
+								}
+								.ggbrowse-a:link,.ggbrowse-a:active,.ggbrowse-a:visited,.ggbrowse-a:hover {
+									color: black;
+									font-weight: bold;
+									text-shadow: 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white, 0px 0px 4px white;
+								}
+								.ggbrowse-a:hover {
+									color: grey;
+								}
+								
+								.whe-iwgsc2018 {
+									background-image: url(/ggds/whe-iwgsc2018/banner.jpg);
+								}
+								.whe-svevo2018 {
+									background-image: url(/ggds/whe-svevo2018/banner.jpg);
+								}
+								.whe-tauschii2017 {
+									background-image: url(/ggds/whe-tauschii2017/banner.jpg);
+								}
+								.whe-zavitan2019 {
+									background-image: url(/ggds/whe-zavitan2019/banner.jpg);
+								}
+								.whe-zavitan2017 {
+									background-image: url(/ggds/whe-zavitan2017/banner.jpg);
+								}
+								.whe-pan2017 {
+									background-image: url(/ggds/whe-pan2017/banner.jpg);
+								}
+								.whe-estmaps {
+									background-image: url(/ggds/whe-iwgsc2018/banner.jpg);
+								}
+								.whe-physicalmaps {
+									background-image: url(/ggds/whe-iwgsc2018/banner.jpg);
+								}
+								.whe-grainmaps {
+									background-image: url(/ggds/whe-iwgsc2018/banner.jpg);
+								}
+								.bar-morex2018 {
+									background-image: url(/ggds/bar-morex2018/banner.jpg);
+								}
+								.bar-ensembl2016 {
+									background-image: url(/ggds/bar-ensembl2016/banner.jpg);
+								}
+								.bar-barbinmaps {
+									background-image: url(/ggds/bar-morex2018/banner.jpg);
+								}
+								.rye-secale2017 {
+									background-image: url(/ggds/rye-secale2017/banner.jpg);
+								}
+								.rye-1rsmap {
+									background-image: url(/ggds/rye-secale2017/banner.jpg);
+								}
+								.oat-avena2013 {
+									background-image: url(/ggds/oat-avena2013/banner.jpg);
+								}
+								.other-brach {
+									background-image: url(/ggds/whe-iwgsc2018/banner.jpg);
+								}
+								.other-ricecereal {
+									background-image: url(/ggds/whe-iwgsc2018/banner.jpg);
+								}
+								
+								</style>`;
+								str += `
+								<div class="ggbrowse-item"><img class="ggbrowse-bkg" src="/ggds/whe-iwgsc2/banner.jpg"><div><a class="ggbrowse-a" href="/jb?data=/ggds/whe-iwgsc2">Wheat Chinese Spring IWGSC RefSeq v2.1 genome assembly (2021)</a></div></div>
+								<div class="ggbrowse-item"><img class="ggbrowse-bkg" src="/ggds/whe-iwgsc2018/banner.jpg"><div><a class="ggbrowse-a" href="/jb?data=/ggds/whe-iwgsc2018">Wheat Chinese Spring IWGSC RefSeq v1.0 genome assembly (2018)</a></div></div>
+								<div class="ggbrowse-item"><img class="ggbrowse-bkg" src="/ggds/bar-morex3/banner.jpg"><div><a class="ggbrowse-a" href="/jb?data=/ggds/bar-morex3">Barley Morex V3 (2021)</a></div></div>
+								<div class="ggbrowse-item"><img class="ggbrowse-bkg" src="/ggds/oat-sang/banner.jpg"><div><a class="ggbrowse-a" href="/jb?data=/ggds/oat-sang">Avena sativa, Oat Sang v1 Genome, Kamal et al. (2022)</a></div></div>
+								<div class="ggbrowse-item"><img class="ggbrowse-bkg" src="/ggds/oat-ot3098v2-pepsico/banner.jpg"><div><a class="ggbrowse-a" href="/jb?data=/ggds/oat-ot3098v2-pepsico">PepsiCo OT3098 v2 Hexaploid Oat (2021)</a></div></div>
+								<div class="ggbrowse-item"><img class="ggbrowse-bkg" src="/ggds/rye-Lo7-2021/banner.jpg"><div><a class="ggbrowse-a" href="/jb?data=/ggds/rye-Lo7-2021">Rye Lo7 pseudomolecules (2021)</a></div></div>
+								`;
+								$(thisb).html(str);
+							});
+						},
+						buttons: {
+						   Ok: function() {
+							  $(this).dialog("close");
+						   }
+						}
+					 });
+				});
+	
+			},100);
+
 			$("body").on('click','span[widgetid="dropdownbutton_dataset"]',function() {
 				//console.log("Genome Menu Click");
 

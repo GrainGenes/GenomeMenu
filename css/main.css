@@ -34,4 +34,8 @@ div.menuBar {
 [role='popmenu'] {
 	z-index: 99999;
 }
-  
+
+.genomemenu2 {
+	cursor: pointer;	
+	padding-left: 25px;
+}
